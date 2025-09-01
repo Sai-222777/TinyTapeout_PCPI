@@ -71,7 +71,7 @@ module tt_um_Sai_222777 (
         if(!rst_n)
         begin
             count <= 0;
-            state <= 0;
+            state <= 2'b00;
             pcpi_valid <= 0;
         end
         else
