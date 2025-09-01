@@ -1,24 +1,4 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 08/11/2025 09:30:22 PM
-// Design Name: 
-// Module Name: own_pcpi
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
 
 module fused_matrix_mult_pcpi (
     input         clk,
@@ -101,11 +81,9 @@ module fused_matrix_mult_pcpi (
 
     always @(posedge clk) begin
         if (!resetn) begin
-            ready <= 0;
+            ready <= 1;
             start <= 0;
         end else begin
-            ready <= 0;
-            
 
             if (pcpi_valid && opcode == 7'b0001011) begin
                 case (funct3)
@@ -122,6 +100,10 @@ module fused_matrix_mult_pcpi (
                         begin
                             bias[(address-18) / 3][address % 3] <= value;
                         end
+                        else if(address == 27)
+                        begin
+                            threshold <= value;
+                        end
                         ready <= 1;
                         result <= 0;
                         start <= 0;
@@ -133,6 +115,7 @@ module fused_matrix_mult_pcpi (
                     end
                     3'b111: begin
                         start <= 1;
+                        ready <= 0;
                     end
                 endcase
             end
@@ -153,7 +136,6 @@ module fused_matrix_mult_pcpi (
     endgenerate
     
     genvar i_g, j_g;
-    // PE grid
     generate
         for (i_g = 0; i_g < 3; i_g = i_g + 1) begin : row
             for (j_g = 0; j_g < 3; j_g = j_g + 1) begin : col
@@ -162,7 +144,6 @@ module fused_matrix_mult_pcpi (
                     .rst(!resetn),
                     .a_in(a_wire[i_g][j_g]),
                     .b_in(b_wire[i_g][j_g]),
-//                    .c_in((cycle_count == 0) ? 0 : c_wire[i_g][j_g]),
                     .c_in((cycle_count == 0) ? bias[i_g][j_g] : c_wire[i_g][j_g]),
                     .a_out(a_wire[i_g][j_g+1]),
                     .b_out(b_wire[i_g+1][j_g]),
