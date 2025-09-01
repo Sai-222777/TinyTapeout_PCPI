@@ -32,6 +32,9 @@ module tt_um_Sai_222777 (
     reg pcpi_valid;
     reg [31:0] instruction_latched;
     wire pcpi_ready;
+
+    wire pcpi_wait, pcpi_wr;
+    wire [31:0] pcpi_rd;
     
     fused_matrix_mult_pcpi pcpi_unit(
         .clk(clk),
@@ -39,6 +42,9 @@ module tt_um_Sai_222777 (
         .pcpi_valid(pcpi_valid),
         .pcpi_insn(instruction_latched),
         .pcpi_ready(pcpi_ready)
+        .pcpi_wr(pcpi_wr),
+        .pcpi_wait(pcpi_wait),
+        .pcpi_rd(pcpi_rd)
     );
     
     
