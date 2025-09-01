@@ -5,8 +5,6 @@ module fused_matrix_mult_pcpi (
     input         resetn,
     input         pcpi_valid,
     input  [31:0] pcpi_insn,
-    input  [31:0] pcpi_rs1,
-    input  [31:0] pcpi_rs2,
     output        pcpi_wr,
     output [31:0] pcpi_rd,
     output        pcpi_wait,
