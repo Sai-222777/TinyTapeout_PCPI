@@ -25,17 +25,17 @@ project:
 # This section is for the datasheet/website. Use descriptive names (e.g., RX, TX, MOSI, SCL, SEG_A, etc.).
 pinout:
   # Inputs
-  ui[0]: ""
-  ui[1]: ""
-  ui[2]: ""
-  ui[3]: ""
-  ui[4]: ""
+  ui[0]: "Host (Currently Sending an Instruction Segment)"
+  ui[1]: "Instruction Segment 0"
+  ui[2]: "Instruction Segment 1"
+  ui[3]: "Instruction Segment 2"
+  ui[4]: "Instruction Segment 3"
   ui[5]: ""
   ui[6]: ""
   ui[7]: ""
 
   # Outputs
-  uo[0]: ""
+  uo[0]: "Device (Currently Received an Instruction Segment)"
   uo[1]: ""
   uo[2]: ""
   uo[3]: ""
