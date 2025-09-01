@@ -41,7 +41,7 @@ module tt_um_Sai_222777 (
         .resetn(rst_n),
         .pcpi_valid(pcpi_valid),
         .pcpi_insn(instruction_latched),
-        .pcpi_ready(pcpi_ready)
+        .pcpi_ready(pcpi_ready),
         .pcpi_wr(pcpi_wr),
         .pcpi_wait(pcpi_wait),
         .pcpi_rd(pcpi_rd)
