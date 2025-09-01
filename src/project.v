@@ -18,6 +18,10 @@ module tt_um_Sai_222777 (
     
     assign uio_out = 0;
     assign uio_oe  = 0;
+
+    wire _unused = &{ena, 1'b0};
+    wire [7:0] unused;
+    assign unused = uio_in;
     
     wire [3:0] instruction_segment;
     wire sending_current,received_current;
