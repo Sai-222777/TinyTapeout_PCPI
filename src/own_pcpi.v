@@ -22,7 +22,8 @@ module fused_matrix_mult_pcpi (
 
     reg signed [15:0] A [0:2][0:2];
     reg signed [15:0] B [0:2][0:2];
-    (*DONT_TOUCH="yes"*) reg C [0:2][0:2];
+    // (*DONT_TOUCH="yes"*) 
+    reg C [0:2][0:2];
     reg signed [15:0] bias [0:2][0:2];
     
 
