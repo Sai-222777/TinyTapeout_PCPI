@@ -49,19 +49,28 @@ module tt_um_Sai_222777 (
     
     
     reg [2:0] count;
-    genvar e;
-    generate
-        for(e=0;e<8;e=e+1)
+    // genvar e;
+    // generate
+    //     for(e=0;e<8;e=e+1)
+    //     begin
+    //         always @(posedge clk)
+    //         begin
+    //             if(received_current && e==count)
+    //             begin
+    //                 instruction_latched[4*(e+1)-1:4*e] <= instruction_segment;
+    //             end
+    //         end
+    //     end
+    // endgenerate
+
+    always @(posedge clk) 
+    begin
+        if(received_current) 
         begin
-            always @(posedge clk)
-            begin
-                if(received_current && e==count)
-                begin
-                    instruction_latched[4*(e+1)-1:4*e] <= instruction_segment;
-                end
-            end
+            instruction_latched[4*count +: 4] <= instruction_segment;
         end
-    endgenerate
+    end
+
     
     reg [1:0] state;
     assign received_current = state == 2'b01;
