@@ -134,22 +134,22 @@ module fused_matrix_mult_pcpi (
         end
     endgenerate
     
-    // genvar i_g, j_g;
-    // generate
-    //     for (i_g = 0; i_g < 3; i_g = i_g + 1) begin : row
-    //         for (j_g = 0; j_g < 3; j_g = j_g + 1) begin : col
-    //             pe pe_inst(
-    //                 .clk((clk & !resetn) | (clk & start)),
-    //                 .rst(!resetn),
-    //                 .a_in(a_wire[i_g][j_g]),
-    //                 .b_in(b_wire[i_g][j_g]),
-    //                 .c_in((cycle_count == 0) ? bias[i_g][j_g] : c_wire[i_g][j_g]),
-    //                 .a_out(a_wire[i_g][j_g+1]),
-    //                 .b_out(b_wire[i_g+1][j_g]),
-    //                 .c_out(c_wire[i_g][j_g])
-    //             );
-    //         end
-    //     end
-    // endgenerate
+    genvar i_g, j_g;
+    generate
+        for (i_g = 0; i_g < 3; i_g = i_g + 1) begin : row
+            for (j_g = 0; j_g < 3; j_g = j_g + 1) begin : col
+                pe pe_inst(
+                    .clk((clk & !resetn) | (clk & start)),
+                    .rst(!resetn),
+                    .a_in(a_wire[i_g][j_g]),
+                    .b_in(b_wire[i_g][j_g]),
+                    .c_in((cycle_count == 0) ? bias[i_g][j_g] : c_wire[i_g][j_g]),
+                    .a_out(a_wire[i_g][j_g+1]),
+                    .b_out(b_wire[i_g+1][j_g]),
+                    .c_out(c_wire[i_g][j_g])
+                );
+            end
+        end
+    endgenerate
     
 endmodule
