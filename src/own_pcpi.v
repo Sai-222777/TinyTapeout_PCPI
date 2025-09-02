@@ -6,7 +6,7 @@ module fused_matrix_mult_pcpi (
     input         pcpi_valid,
     input  [31:0] pcpi_insn,
     output        pcpi_wr,
-    output [31:0] pcpi_rd,
+    // output [31:0] pcpi_rd,
     output        pcpi_wait,
     output        pcpi_ready
 );
@@ -121,7 +121,7 @@ module fused_matrix_mult_pcpi (
         end
     end
 
-    assign pcpi_rd = result;
+    // assign pcpi_rd = result;
     assign pcpi_wr = ready;
     assign pcpi_ready = ready | (count == 8);
     assign pcpi_wait = start & (count < 8);
