@@ -26,7 +26,7 @@ module tt_um_Sai_222777 (
     wire [3:0] instruction_segment;
     // wire sending_current,received_current;
     assign instruction_segment = ui_in[4:1];
-    assign sending_current = ui_in[0];
+    // assign sending_current = ui_in[0];
     assign uo_out = {7'b0,received_current};
     
     reg pcpi_valid;
