@@ -76,52 +76,52 @@ module tt_um_Sai_222777 (
     reg [1:0] state;
     assign received_current = state == 2'b01;
     
-    always @(posedge clk)
-    begin
-        if(!rst_n)
-        begin
-            count <= 0;
-            state <= 2'b00;
-            pcpi_valid <= 0;
-        end
-        else
-        begin
-            case(state)
-                2'b00 :
-                begin
-                    if(sending_current)
-                    begin
-                        state <= 1;
-                    end
-                end
-                2'b01 :
-                begin
-                    if(count < 7)
-                    begin
-                        count <= count + 1;
-                        state <= 0;
-                    end
-                    else
-                    begin
-                        count <= 0;
-                        state <= 2; //state <= 2; should actually be 2, but changed it for testbench simulation
-                        pcpi_valid <= 1;
-                    end
-                end
-                2'b10:
-                begin
-                    pcpi_valid <= 0;
-                    state <= 3;
-                end
-                2'b11:
-                begin
-                    if(pcpi_ready)
-                    begin
-                        state <= 0;
-                    end
-                end
-            endcase
-        end
-    end
+    // always @(posedge clk)
+    // begin
+    //     if(!rst_n)
+    //     begin
+    //         count <= 0;
+    //         state <= 2'b00;
+    //         pcpi_valid <= 0;
+    //     end
+    //     else
+    //     begin
+    //         case(state)
+    //             2'b00 :
+    //             begin
+    //                 if(sending_current)
+    //                 begin
+    //                     state <= 1;
+    //                 end
+    //             end
+    //             2'b01 :
+    //             begin
+    //                 if(count < 7)
+    //                 begin
+    //                     count <= count + 1;
+    //                     state <= 0;
+    //                 end
+    //                 else
+    //                 begin
+    //                     count <= 0;
+    //                     state <= 2; //state <= 2; should actually be 2, but changed it for testbench simulation
+    //                     pcpi_valid <= 1;
+    //                 end
+    //             end
+    //             2'b10:
+    //             begin
+    //                 pcpi_valid <= 0;
+    //                 state <= 3;
+    //             end
+    //             2'b11:
+    //             begin
+    //                 if(pcpi_ready)
+    //                 begin
+    //                     state <= 0;
+    //                 end
+    //             end
+    //         endcase
+    //     end
+    // end
     
 endmodule
