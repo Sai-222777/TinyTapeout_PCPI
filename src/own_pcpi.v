@@ -48,7 +48,7 @@ module fused_matrix_mult_pcpi (
     begin
         if(!resetn) 
         begin
-            cycle_count <= 0;
+            cycle_count <= 3'd0;
             result_latched <= 0;
             threshold <= -70;
             count <= 0;
