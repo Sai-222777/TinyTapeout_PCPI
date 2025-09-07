@@ -36,16 +36,16 @@ module tt_um_Sai_222777 (
     wire pcpi_wait, pcpi_wr;
     wire [31:0] pcpi_rd;
     
-    fused_matrix_mult_pcpi pcpi_unit(
-        .clk(clk),
-        .resetn(rst_n),
-        .pcpi_valid(pcpi_valid),
-        .pcpi_insn(instruction_latched),
-        .pcpi_ready(pcpi_ready),
-        .pcpi_wr(pcpi_wr),
-        .pcpi_wait(pcpi_wait),
-        .pcpi_rd(pcpi_rd)
-    );
+    // fused_matrix_mult_pcpi pcpi_unit(
+    //     .clk(clk),
+    //     .resetn(rst_n),
+    //     .pcpi_valid(pcpi_valid),
+    //     .pcpi_insn(instruction_latched),
+    //     .pcpi_ready(pcpi_ready),
+    //     .pcpi_wr(pcpi_wr),
+    //     .pcpi_wait(pcpi_wait),
+    //     .pcpi_rd(pcpi_rd)
+    // );
 
     assign uio_out = {7'd0,pcpi_wait};
     
