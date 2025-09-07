@@ -16,7 +16,7 @@ module tt_um_Sai_222777 (
     input  wire       rst_n     // reset_n - low to reset
 );
     
-    assign uio_out = 0;
+    // assign uio_out = 0;
     assign uio_oe  = 0;
 
     wire _unused = &{ena, 1'b0};
@@ -46,7 +46,8 @@ module tt_um_Sai_222777 (
         .pcpi_wait(pcpi_wait),
         .pcpi_rd(pcpi_rd)
     );
-    
+
+    assign uio_out = {7'd0,pcpi_wait};
     
     reg [2:0] count;
     genvar e;
