@@ -74,7 +74,7 @@ module tt_um_Sai_222777 (
 
     
     reg [1:0] state;
-    assign received_current = state == 2'b01;
+    // assign received_current = state == 2'b01;
     
     // always @(posedge clk)
     // begin
