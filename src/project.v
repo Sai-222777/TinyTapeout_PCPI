@@ -29,12 +29,12 @@ module tt_um_Sai_222777 (
         end
     end
     
-//     reg pcpi_valid;
-//     reg [31:0] instruction_latched;
-//     wire pcpi_ready;
+    reg pcpi_valid;
+    reg [31:0] instruction_latched;
+    wire pcpi_ready;
 
-//     wire pcpi_wait, pcpi_wr;
-//     wire [31:0] pcpi_rd;
+    wire pcpi_wait, pcpi_wr;
+    wire [31:0] pcpi_rd;
     
 //     fused_matrix_mult_pcpi pcpi_unit(
 //         .clk(clk),
