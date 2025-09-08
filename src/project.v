@@ -68,7 +68,7 @@ module tt_um_Sai_222777 (
     begin
         if(received_current) 
         begin
-            instruction_latched[4*count +: 4] <= instruction_segment;
+            instruction_latched[4:0] <= instruction_segment;
         end
     end
     
