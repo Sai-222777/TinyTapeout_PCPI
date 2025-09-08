@@ -30,40 +30,39 @@ module tt_um_Sai_222777 (
     assign uo_out = {7'd0,received_current};
     
     reg pcpi_valid;
-    // reg [31:0] instruction_latched;
-    wire [31:0] instruction_latched;
+    reg [31:0] instruction_latched;
     wire pcpi_ready;
 
     wire pcpi_wait, pcpi_wr;
     wire [31:0] pcpi_rd;
     
-    // fused_matrix_mult_pcpi pcpi_unit(
-    //     .clk(clk),
-    //     .resetn(rst_n),
-    //     .pcpi_valid(pcpi_valid),
-    //     .pcpi_insn(instruction_latched),
-    //     .pcpi_ready(pcpi_ready),
-    //     .pcpi_wr(pcpi_wr),
-    //     .pcpi_wait(pcpi_wait),
-    //     .pcpi_rd(pcpi_rd)
-    // );
+    fused_matrix_mult_pcpi pcpi_unit(
+        .clk(clk),
+        .resetn(rst_n),
+        .pcpi_valid(pcpi_valid),
+        .pcpi_insn(instruction_latched),
+        .pcpi_ready(pcpi_ready),
+        .pcpi_wr(pcpi_wr),
+        .pcpi_wait(pcpi_wait),
+        .pcpi_rd(pcpi_rd)
+    );
 
     assign uio_out = {7'd0,pcpi_wait};
     
     reg [2:0] count;
-    // genvar e;
-    // generate
-    //     for(e=0;e<8;e=e+1)
-    //     begin
-    //         always @(posedge clk)
-    //         begin
-    //             if(received_current && e==count)
-    //             begin
-    //                 instruction_latched[4*(e+1)-1:4*e] <= instruction_segment;
-    //             end
-    //         end
-    //     end
-    // endgenerate
+    genvar e;
+    generate
+        for(e=0;e<8;e=e+1)
+        begin
+            always @(posedge clk)
+            begin
+                if(received_current && e==count)
+                begin
+                    instruction_latched[4*(e+1)-1:4*e] <= instruction_segment;
+                end
+            end
+        end
+    endgenerate
 
     // always @(posedge clk) 
     // begin
