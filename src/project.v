@@ -16,7 +16,7 @@ module tt_um_Sai_222777 (
     wire sending_current,received_current;
     assign instruction_segment = ui_in[4:1];
     assign sending_current = ui_in[0];
-    assign uo_out = {7{1'b0},received_current};
+    assign uo_out = {7'b0,received_current};
     
 //     reg pcpi_valid;
 //     reg [31:0] instruction_latched;
