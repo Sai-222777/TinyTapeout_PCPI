@@ -49,7 +49,7 @@ module tt_um_Sai_222777 (
 
 //     assign uio_out = {7'd0,pcpi_wait};
     
-    // reg [2:0] count;
+    reg [2:0] count;
     // genvar e;
     // generate
     //     for(e=0;e<8;e=e+1)
@@ -63,6 +63,14 @@ module tt_um_Sai_222777 (
     //         end
     //     end
     // endgenerate
+
+    always @(posedge clk) 
+    begin
+        if(received_current) 
+        begin
+            instruction_latched[4*count +: 4] <= instruction_segment;
+        end
+    end
     
     wire [3:0] m = ui_in [3:0];
     wire [3:0] q = ui_in [7:4];
@@ -88,7 +96,6 @@ module tt_um_Sai_222777 (
     full_adder f12(temp_carry[7], (m[3] & q[3]), temp_carry[10], p[6], p[7]);
     
     // assign uo_out = 0;
-    // assign uo_out = {7'b0,received_current};
     
       assign uio_out = p;
   assign uio_oe  = 0;
