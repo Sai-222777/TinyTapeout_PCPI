@@ -12,6 +12,47 @@ module tt_um_Sai_222777 (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+    wire [3:0] instruction_segment;
+    wire sending_current,received_current;
+    assign instruction_segment = ui_in[4:1];
+    assign sending_current = ui_in[0];
+    // assign uo_out = {7'd0,received_current};
+    
+//     reg pcpi_valid;
+//     reg [31:0] instruction_latched;
+//     wire pcpi_ready;
+
+//     wire pcpi_wait, pcpi_wr;
+//     wire [31:0] pcpi_rd;
+    
+//     fused_matrix_mult_pcpi pcpi_unit(
+//         .clk(clk),
+//         .resetn(rst_n),
+//         .pcpi_valid(pcpi_valid),
+//         .pcpi_insn(instruction_latched),
+//         .pcpi_ready(pcpi_ready),
+//         .pcpi_wr(pcpi_wr),
+//         .pcpi_wait(pcpi_wait),
+//         .pcpi_rd(pcpi_rd)
+//     );
+
+//     assign uio_out = {7'd0,pcpi_wait};
+    
+//     reg [2:0] count;
+//     genvar e;
+//     generate
+//         for(e=0;e<8;e=e+1)
+//         begin
+//             always @(posedge clk)
+//             begin
+//                 if(received_current && e==count)
+//                 begin
+//                     instruction_latched[4*(e+1)-1:4*e] <= instruction_segment;
+//                 end
+//             end
+//         end
+//     endgenerate
+    
     wire [3:0] m = ui_in [3:0];
     wire [3:0] q = ui_in [7:4];
     wire [12:0]temp_carry;
