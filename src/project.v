@@ -16,18 +16,18 @@ module tt_um_Sai_222777 (
     wire sending_current,received_current;
     assign instruction_segment = ui_in[4:1];
     assign sending_current = ui_in[0];
-    // assign uo_out = {7'b0,received_current};
+    assign uo_out = {7'b0,received_current};
 
     reg [1:0] state;
     assign received_current = (state == 2'b01);
 
-    // always @(posedge clk)
-    // begin
-    //     if(!rst_n)
-    //     begin
-    //         state <= 2'b00;
-    //     end
-    // end
+    always @(posedge clk)
+    begin
+        if(!rst_n)
+        begin
+            state <= 2'b00;
+        end
+    end
     
 //     reg pcpi_valid;
 //     reg [31:0] instruction_latched;
@@ -88,7 +88,7 @@ module tt_um_Sai_222777 (
     full_adder f12(temp_carry[7], (m[3] & q[3]), temp_carry[10], p[6], p[7]);
     
     // assign uo_out = 0;
-    assign uo_out = {7'b0,received_current};
+    // assign uo_out = {7'b0,received_current};
     
       assign uio_out = p;
   assign uio_oe  = 0;
