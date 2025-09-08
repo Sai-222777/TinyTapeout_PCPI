@@ -56,7 +56,7 @@ module tt_um_Sai_222777 (
         begin
             always @(posedge clk)
             begin
-                if(received_current && e==count)
+                if(received_current && (e[2:0]==count))
                 begin
                     instruction_latched[4*(e+1)-1:4*e] <= instruction_segment;
                 end
