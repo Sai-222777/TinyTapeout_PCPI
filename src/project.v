@@ -19,7 +19,7 @@ module tt_um_Sai_222777 (
     // assign uo_out = 0; //{7'b0,received_current};
 
     reg [1:0] state;
-    assign received_current = state == 2'b01;
+    // assign received_current = state == 2'b01;
     
 //     reg pcpi_valid;
 //     reg [31:0] instruction_latched;
