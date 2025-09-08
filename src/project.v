@@ -21,21 +21,71 @@ module tt_um_Sai_222777 (
     reg [1:0] state;
     assign received_current = (state == 2'b01);
 
-    always @(posedge clk)
-    begin
-        if(!rst_n)
-        begin
-            state <= 2'b00;
-            count <= 3'b000;
-        end
-    end
-    
     reg pcpi_valid;
-    reg [3:0] instruction_latched;
+    reg [31:0] instruction_latched;
     wire pcpi_ready;
 
     wire pcpi_wait, pcpi_wr;
     wire [31:0] pcpi_rd;
+
+    // always @(posedge clk)
+    // begin
+    //     if(!rst_n)
+    //     begin
+    //         state <= 2'b00;
+    //         count <= 3'b000;
+    //     end
+    // end
+
+    always @(posedge clk)
+    begin
+        if(!rst_n)
+        begin
+            count <= 3'b000;
+            state <= 2'b00;
+            pcpi_valid <= 0;
+        end
+        // else
+        // begin
+        //     case(state)
+        //         2'b00 :
+        //         begin
+        //             if(sending_current)
+        //             begin
+        //                 state <= 1;
+        //             end
+        //         end
+        //         2'b01 :
+        //         begin
+        //             if(count < 7)
+        //             begin
+        //                 count <= count + 1;
+        //                 state <= 2'b00;
+        //             end
+        //             else
+        //             begin
+        //                 count <= 3'b000;
+        //                 state <= 2'b10; //state <= 2; should actually be 2, but changed it for testbench simulation
+        //                 pcpi_valid <= 1;
+        //             end
+        //         end
+        //         2'b10:
+        //         begin
+        //             pcpi_valid <= 0;
+        //             state <= 2'b11;
+        //         end
+        //         2'b11:
+        //         begin
+        //             if(pcpi_ready)
+        //             begin
+        //                 state <= 2'b00;
+        //             end
+        //         end
+        //     endcase
+        // end
+    end
+    
+    
     
 //     fused_matrix_mult_pcpi pcpi_unit(
 //         .clk(clk),
@@ -64,23 +114,7 @@ module tt_um_Sai_222777 (
             end
         end
     endgenerate
-
-    // always @(posedge clk) 
-    // begin
-    //     if(received_current) 
-    //     begin
-    //         case(count)
-    //                 3'b000:
-    //                 begin
-    //                     instruction_latched[3:0] <= instruction_segment;
-    //                 end
-    //                 default: 
-    //                 begin 
-    //                     instruction_latched[3:0] <= 0;         
-    //                 end
-    //         endcase
-    //     end
-    // end
+    
     
     wire [3:0] m = ui_in [3:0];
     wire [3:0] q = ui_in [7:4];
