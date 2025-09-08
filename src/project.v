@@ -75,7 +75,7 @@ module tt_um_Sai_222777 (
     full_adder f10(temp_adds[4], (m[1] & q[3]), temp_carry[8], p[4], temp_carry[9]);
     full_adder f11(temp_adds[5], (m[2] & q[3]), temp_carry[9], p[5], temp_carry[10]);
     full_adder f12(temp_carry[7], (m[3] & q[3]), temp_carry[10], p[6], p[7]);
-    // assign uo_out = p;
+    assign uo_out = p;
       assign uio_out = 0;
   assign uio_oe  = 0;
 
