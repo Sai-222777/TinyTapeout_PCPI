@@ -26,6 +26,7 @@ module tt_um_Sai_222777 (
         if(!rst_n)
         begin
             state <= 2'b00;
+            count <= 3'b000;
         end
     end
     
