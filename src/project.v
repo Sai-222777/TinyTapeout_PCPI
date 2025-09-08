@@ -88,7 +88,7 @@ module tt_um_Sai_222777 (
     full_adder f12(temp_carry[7], (m[3] & q[3]), temp_carry[10], p[6], p[7]);
     assign uo_out = 0;
       assign uio_out = p;
-  assign uio_oe  = 1;
+  assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
   wire _unused = &{ena, clk, rst_n, uio_in, 1'b0};
