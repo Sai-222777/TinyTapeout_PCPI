@@ -68,7 +68,13 @@ module tt_um_Sai_222777 (
     begin
         if(received_current) 
         begin
-            instruction_latched[4:0] <= instruction_segment;
+            case(count)
+                begin
+                    3'b000:
+                    begin
+                        instruction_latched[4:0] <= instruction_segment;
+                    end
+                end
         end
     end
     
