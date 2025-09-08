@@ -30,7 +30,7 @@ module tt_um_Sai_222777 (
     end
     
     reg pcpi_valid;
-    reg [31:0] instruction_latched;
+    reg [3:0] instruction_latched;
     wire pcpi_ready;
 
     wire pcpi_wait, pcpi_wr;
@@ -71,7 +71,7 @@ module tt_um_Sai_222777 (
             case(count)
                     3'b000:
                     begin
-                        // instruction_latched[3:0] <= instruction_segment;
+                        instruction_latched[3:0] <= instruction_segment;
                     end
             endcase
         end
