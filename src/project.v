@@ -51,36 +51,36 @@ module tt_um_Sai_222777 (
 //     assign uio_out = {7'd0,pcpi_wait};
     
     reg [2:0] count;
-    // genvar e;
-    // generate
-    //     for(e=0;e<8;e=e+1)
-    //     begin
-    //         always @(posedge clk)
-    //         begin
-    //             if(received_current && (e[2:0]==count))
-    //             begin
-    //                 instruction_latched[4*(e+1)-1:4*e] <= instruction_segment;
-    //             end
-    //         end
-    //     end
-    // endgenerate
-
-    always @(posedge clk) 
-    begin
-        if(received_current) 
+    genvar e;
+    generate
+        for(e=0;e<8;e=e+1)
         begin
-            case(count)
-                    3'b000:
-                    begin
-                        instruction_latched[3:0] <= instruction_segment;
-                    end
-                    default: 
-                    begin 
-                        instruction_latched[3:0] <= 0;         
-                    end
-            endcase
+            always @(posedge clk)
+            begin
+                if(received_current && (e[2:0]==count))
+                begin
+                    instruction_latched[4*(e+1)-1:4*e] <= instruction_segment;
+                end
+            end
         end
-    end
+    endgenerate
+
+    // always @(posedge clk) 
+    // begin
+    //     if(received_current) 
+    //     begin
+    //         case(count)
+    //                 3'b000:
+    //                 begin
+    //                     instruction_latched[3:0] <= instruction_segment;
+    //                 end
+    //                 default: 
+    //                 begin 
+    //                     instruction_latched[3:0] <= 0;         
+    //                 end
+    //         endcase
+    //     end
+    // end
     
     wire [3:0] m = ui_in [3:0];
     wire [3:0] q = ui_in [7:4];
