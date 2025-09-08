@@ -65,27 +65,27 @@ module tt_um_Sai_222777 (
                     pcpi_valid <= 0;
                     state <= 2'b11;
                 end
-                2'b11:
-                begin
-                    if(pcpi_ready)
-                    begin
-                        state <= 2'b00;
-                    end
-                end
+                // 2'b11:
+                // begin
+                //     if(pcpi_ready)
+                //     begin
+                //         state <= 2'b00;
+                //     end
+                // end
             endcase
         end
     end
     
-    fused_matrix_mult_pcpi pcpi_unit(
-        .clk(clk),
-        .resetn(rst_n),
-        .pcpi_valid(pcpi_valid),
-        .pcpi_insn(instruction_latched),
-        .pcpi_ready(pcpi_ready),
-        .pcpi_wr(pcpi_wr),
-        .pcpi_wait(pcpi_wait),
-        .pcpi_rd(pcpi_rd)
-    );
+    // fused_matrix_mult_pcpi pcpi_unit(
+    //     .clk(clk),
+    //     .resetn(rst_n),
+    //     .pcpi_valid(pcpi_valid),
+    //     .pcpi_insn(instruction_latched),
+    //     .pcpi_ready(pcpi_ready),
+    //     .pcpi_wr(pcpi_wr),
+    //     .pcpi_wait(pcpi_wait),
+    //     .pcpi_rd(pcpi_rd)
+    // );
 
 //     assign uio_out = {7'd0,pcpi_wait};
     
