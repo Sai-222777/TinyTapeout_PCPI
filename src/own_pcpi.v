@@ -69,13 +69,13 @@ module fused_matrix_mult_pcpi (
         //                 C[i][j] <= c_wire[i][j] >= threshold;
         //     end
         // end
-        // else if(!resetdd)
-        // begin
-        //     resetdd <= 1;
-        //     cycle_count <= 0;
-        //     count <= 0;
-        //     result_latched <= 0;
-        // end
+        else if(!resetdd)
+        begin
+            resetdd <= 1;
+            cycle_count <= 0;
+            count <= 0;
+            result_latched <= 0;
+        end
     end
 
     always @(posedge clk) 
