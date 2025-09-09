@@ -68,7 +68,7 @@ module fused_matrix_mult_pcpi (
         //             for (j = 0; j < 3; j = j + 1)
         //                 C[i][j] <= c_wire[i][j] >= threshold;
         //     end
-        // end
+        end
         else if(!resetdd)
         begin
             resetdd <= 1;
