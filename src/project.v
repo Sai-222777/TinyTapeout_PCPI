@@ -65,13 +65,13 @@ module tt_um_Sai_222777 (
                     pcpi_valid <= 0;
                     state <= 2'b11;
                 end
-                // 2'b11:
-                // begin
-                //     if(pcpi_ready)
-                //     begin
-                //         state <= 2'b00;
-                //     end
-                // end
+                2'b11:
+                begin
+                    if(pcpi_ready)
+                    begin
+                        state <= 2'b00;
+                    end
+                end
             endcase
         end
     end
