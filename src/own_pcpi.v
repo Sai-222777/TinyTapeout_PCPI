@@ -54,71 +54,74 @@ module fused_matrix_mult_pcpi (
             count <= 0;
             resetdd <= 0;
         end 
-        else if(start)
-        begin
-            if(cycle_count < 7)
-                cycle_count <= cycle_count + 1;
+        // else if(start)
+        // begin
+        //     if(cycle_count < 7)
+        //         cycle_count <= cycle_count + 1;
             
-            if(count < 9) count <= count + 1;
+        //     if(count < 9) count <= count + 1;
             
-            if (cycle_count == 7 && !result_latched) begin
-                result_latched <= 1;
-                resetdd <= 0;
-                for (i = 0; i < 3; i = i + 1)
-                    for (j = 0; j < 3; j = j + 1)
-                        C[i][j] <= c_wire[i][j] >= threshold;
-            end
-        end
-        else if(!resetdd)
-        begin
-            resetdd <= 1;
-            cycle_count <= 0;
-            count <= 0;
-            result_latched <= 0;
-        end
+        //     if (cycle_count == 7 && !result_latched) begin
+        //         result_latched <= 1;
+        //         resetdd <= 0;
+        //         for (i = 0; i < 3; i = i + 1)
+        //             for (j = 0; j < 3; j = j + 1)
+        //                 C[i][j] <= c_wire[i][j] >= threshold;
+        //     end
+        // end
+        // else if(!resetdd)
+        // begin
+        //     resetdd <= 1;
+        //     cycle_count <= 0;
+        //     count <= 0;
+        //     result_latched <= 0;
+        // end
     end
 
-    always @(posedge clk) begin
+    always @(posedge clk) 
+        begin
         if (!resetn) begin
             ready <= 1;
             start <= 0;
-        end else begin
+            result <= 0;
+        end 
+        // else begin
 
-            if (pcpi_valid && opcode == 7'b0001011) begin
-                case (funct3)
-                    3'b000: begin
-                        if(address < 9)
-                        begin
-                            A[address / 3][address % 3] <= value;
-                        end
-                        else if(address < 18)
-                        begin
-                            B[(address-9) / 3][address % 3] <= value;
-                        end
-                        else if(address < 27)
-                        begin
-                            bias[(address-18) / 3][address % 3] <= value;
-                        end
-                        else if(address == 27)
-                        begin
-                            threshold <= value;
-                        end
-                        ready <= 1;
-                        result <= 0;
-                        start <= 0;
-                    end
-                    3'b101: begin
-                        start <= 0;
-                        ready <= 1;
-                        result <= 0;
-                    end
-                    3'b111: begin
-                        start <= 1;
-                        ready <= 0;
-                    end
-                endcase
-            end
-        end
+        //     if (pcpi_valid && opcode == 7'b0001011) begin
+        //         case (funct3)
+        //             3'b000: begin
+        //                 if(address < 9)
+        //                 begin
+        //                     A[address / 3][address % 3] <= value;
+        //                 end
+        //                 else if(address < 18)
+        //                 begin
+        //                     B[(address-9) / 3][address % 3] <= value;
+        //                 end
+        //                 else if(address < 27)
+        //                 begin
+        //                     bias[(address-18) / 3][address % 3] <= value;
+        //                 end
+        //                 else if(address == 27)
+        //                 begin
+        //                     threshold <= value;
+        //                 end
+        //                 ready <= 1;
+        //                 result <= 0;
+        //                 start <= 0;
+        //             end
+        //             3'b101: begin
+        //                 start <= 0;
+        //                 ready <= 1;
+        //                 result <= 0;
+        //             end
+        //             3'b111: begin
+        //                 start <= 1;
+        //                 ready <= 0;
+        //             end
+        //         endcase
+        //     end
+        // end
     end
 
     assign pcpi_rd = result;
@@ -126,30 +129,30 @@ module fused_matrix_mult_pcpi (
     assign pcpi_ready = ready | (count == 8);
     assign pcpi_wait = start & (count < 8);
     
-    generate
-        genvar r;
-        for (r = 0; r < 3; r = r + 1) begin : input_feeds
-            assign a_wire[r][0] = ((cycle_count >= r) && (cycle_count - r < 3)) ? A[r][cycle_count - r] : 0;
-            assign b_wire[0][r] = ((cycle_count >= r) && (cycle_count - r < 3)) ? B[cycle_count - r][r] : 0;
-        end
-    endgenerate
+    // generate
+    //     genvar r;
+    //     for (r = 0; r < 3; r = r + 1) begin : input_feeds
+    //         assign a_wire[r][0] = ((cycle_count >= r) && (cycle_count - r < 3)) ? A[r][cycle_count - r] : 0;
+    //         assign b_wire[0][r] = ((cycle_count >= r) && (cycle_count - r < 3)) ? B[cycle_count - r][r] : 0;
+    //     end
+    // endgenerate
     
-    genvar i_g, j_g;
-    generate
-        for (i_g = 0; i_g < 3; i_g = i_g + 1) begin : row
-            for (j_g = 0; j_g < 3; j_g = j_g + 1) begin : col
-                pe pe_inst(
-                    .clk((clk & !resetn) | (clk & start)),
-                    .rst(!resetn),
-                    .a_in(a_wire[i_g][j_g]),
-                    .b_in(b_wire[i_g][j_g]),
-                    .c_in((cycle_count == 0) ? bias[i_g][j_g] : c_wire[i_g][j_g]),
-                    .a_out(a_wire[i_g][j_g+1]),
-                    .b_out(b_wire[i_g+1][j_g]),
-                    .c_out(c_wire[i_g][j_g])
-                );
-            end
-        end
-    endgenerate
+    // genvar i_g, j_g;
+    // generate
+    //     for (i_g = 0; i_g < 3; i_g = i_g + 1) begin : row
+    //         for (j_g = 0; j_g < 3; j_g = j_g + 1) begin : col
+    //             pe pe_inst(
+    //                 .clk((clk & !resetn) | (clk & start)),
+    //                 .rst(!resetn),
+    //                 .a_in(a_wire[i_g][j_g]),
+    //                 .b_in(b_wire[i_g][j_g]),
+    //                 .c_in((cycle_count == 0) ? bias[i_g][j_g] : c_wire[i_g][j_g]),
+    //                 .a_out(a_wire[i_g][j_g+1]),
+    //                 .b_out(b_wire[i_g+1][j_g]),
+    //                 .c_out(c_wire[i_g][j_g])
+    //             );
+    //         end
+    //     end
+    // endgenerate
     
 endmodule
