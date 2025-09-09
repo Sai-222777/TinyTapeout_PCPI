@@ -129,13 +129,13 @@ module fused_matrix_mult_pcpi (
     assign pcpi_ready = ready | (count == 8);
     assign pcpi_wait = start & (count < 8);
     
-    // generate
-    //     genvar r;
-    //     for (r = 0; r < 3; r = r + 1) begin : input_feeds
-    //         assign a_wire[r][0] = ((cycle_count >= r) && (cycle_count - r < 3)) ? A[r][cycle_count - r] : 0;
-    //         assign b_wire[0][r] = ((cycle_count >= r) && (cycle_count - r < 3)) ? B[cycle_count - r][r] : 0;
-    //     end
-    // endgenerate
+    generate
+        genvar r;
+        for (r = 0; r < 3; r = r + 1) begin : input_feeds
+            assign a_wire[r][0] = ((cycle_count >= r) && (cycle_count - r < 3)) ? A[r][cycle_count - r] : 0;
+            assign b_wire[0][r] = ((cycle_count >= r) && (cycle_count - r < 3)) ? B[cycle_count - r][r] : 0;
+        end
+    endgenerate
     
     // genvar i_g, j_g;
     // generate
