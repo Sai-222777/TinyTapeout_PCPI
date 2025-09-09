@@ -50,7 +50,7 @@ module fused_matrix_mult_pcpi (
         begin
             cycle_count <= 3'd0;
             result_latched <= 0;
-            threshold <= -70;
+            // threshold <= -70;
             count <= 0;
             resetdd <= 0;
         end 
@@ -84,6 +84,7 @@ module fused_matrix_mult_pcpi (
             ready <= 1;
             start <= 0;
             result <= 0;
+            threshold <= -70;
         end 
         else begin
 
