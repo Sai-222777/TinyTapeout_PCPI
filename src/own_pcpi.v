@@ -102,10 +102,10 @@ module fused_matrix_mult_pcpi (
                         begin
                             bias[(address-18) / 3][address % 3] <= value;
                         end
-        //                 else if(address == 27)
-        //                 begin
-        //                     threshold <= value;
-        //                 end
+                        else if(address == 27)
+                        begin
+                            threshold <= {{16{value[15]}},value};
+                        end
                         ready <= 1;
                         result <= 0;
                         start <= 0;
