@@ -89,11 +89,11 @@ module fused_matrix_mult_pcpi (
 
             if (pcpi_valid && opcode == 7'b0001011) begin
                 case (funct3)
-        //             3'b000: begin
-        //                 if(address < 9)
-        //                 begin
-        //                     A[address / 3][address % 3] <= value;
-        //                 end
+                    3'b000: begin
+                        if(address < 9)
+                        begin
+                            A[address / 3][address % 3] <= value;
+                        end
         //                 else if(address < 18)
         //                 begin
         //                     B[(address-9) / 3][address % 3] <= value;
@@ -109,7 +109,7 @@ module fused_matrix_mult_pcpi (
         //                 ready <= 1;
         //                 result <= 0;
         //                 start <= 0;
-        //             end
+                    end
                     3'b101: begin
                         start <= 0;
                         ready <= 1;
