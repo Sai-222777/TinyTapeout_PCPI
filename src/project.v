@@ -16,7 +16,7 @@ module tt_um_Sai_222777 (
     wire sending_current,received_current;
     assign instruction_segment = ui_in[4:1];
     assign sending_current = ui_in[0];
-    assign uo_out = {7'b0,received_current};
+    
 
     reg [1:0] state;
     assign received_current = (state == 2'b01);
@@ -27,6 +27,8 @@ module tt_um_Sai_222777 (
 
     wire pcpi_wait, pcpi_wr;
     wire [31:0] pcpi_rd;
+
+    assign uo_out = {6'b0,pcpi_wait,received_current};
 
     always @(posedge clk)
     begin
