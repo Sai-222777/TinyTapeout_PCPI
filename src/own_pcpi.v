@@ -94,21 +94,21 @@ module fused_matrix_mult_pcpi (
                         begin
                             A[address / 3][address % 3] <= value;
                         end
-        //                 else if(address < 18)
-        //                 begin
-        //                     B[(address-9) / 3][address % 3] <= value;
-        //                 end
-        //                 else if(address < 27)
-        //                 begin
-        //                     bias[(address-18) / 3][address % 3] <= value;
-        //                 end
+                        else if(address < 18)
+                        begin
+                            B[(address-9) / 3][address % 3] <= value;
+                        end
+                        else if(address < 27)
+                        begin
+                            bias[(address-18) / 3][address % 3] <= value;
+                        end
         //                 else if(address == 27)
         //                 begin
         //                     threshold <= value;
         //                 end
-        //                 ready <= 1;
-        //                 result <= 0;
-        //                 start <= 0;
+                        ready <= 1;
+                        result <= 0;
+                        start <= 0;
                     end
                     3'b101: begin
                         start <= 0;
