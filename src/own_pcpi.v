@@ -85,10 +85,10 @@ module fused_matrix_mult_pcpi (
             start <= 0;
             result <= 0;
         end 
-        // else begin
+        else begin
 
-        //     if (pcpi_valid && opcode == 7'b0001011) begin
-        //         case (funct3)
+            if (pcpi_valid && opcode == 7'b0001011) begin
+                case (funct3)
         //             3'b000: begin
         //                 if(address < 9)
         //                 begin
@@ -110,18 +110,18 @@ module fused_matrix_mult_pcpi (
         //                 result <= 0;
         //                 start <= 0;
         //             end
-        //             3'b101: begin
-        //                 start <= 0;
-        //                 ready <= 1;
-        //                 result <= 0;
-        //             end
-        //             3'b111: begin
-        //                 start <= 1;
-        //                 ready <= 0;
-        //             end
-        //         endcase
-        //     end
-        // end
+                    3'b101: begin
+                        start <= 0;
+                        ready <= 1;
+                        result <= 0;
+                    end
+                    3'b111: begin
+                        start <= 1;
+                        ready <= 0;
+                    end
+                endcase
+            end
+        end
     end
 
     assign pcpi_rd = result;
