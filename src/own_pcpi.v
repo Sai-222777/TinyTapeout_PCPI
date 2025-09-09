@@ -54,12 +54,12 @@ module fused_matrix_mult_pcpi (
             count <= 0;
             resetdd <= 0;
         end 
-        // else if(start)
-        // begin
-        //     if(cycle_count < 7)
-        //         cycle_count <= cycle_count + 1;
+        else if(start)
+        begin
+            if(cycle_count < 7)
+                cycle_count <= cycle_count + 1;
             
-        //     if(count < 9) count <= count + 1;
+            if(count < 9) count <= count + 1;
             
         //     if (cycle_count == 7 && !result_latched) begin
         //         result_latched <= 1;
