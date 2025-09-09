@@ -61,13 +61,13 @@ module fused_matrix_mult_pcpi (
             
             if(count < 9) count <= count + 1;
             
-        //     if (cycle_count == 7 && !result_latched) begin
-        //         result_latched <= 1;
-        //         resetdd <= 0;
-        //         for (i = 0; i < 3; i = i + 1)
-        //             for (j = 0; j < 3; j = j + 1)
-        //                 C[i][j] <= c_wire[i][j] >= threshold;
-        //     end
+            if (cycle_count == 7 && !result_latched) begin
+                result_latched <= 1;
+                resetdd <= 0;
+                for (i = 0; i < 3; i = i + 1)
+                    for (j = 0; j < 3; j = j + 1)
+                        C[i][j] <= c_wire[i][j] >= threshold;
+            end
         end
         else if(!resetdd)
         begin
