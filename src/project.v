@@ -132,7 +132,7 @@ module tt_um_Sai_222777 (
     
     // assign uo_out = 0;
     
-      assign uio_out = 0;
+      assign uio_out = p;
   assign uio_oe  = 0;
 
   // List all unused inputs to prevent warnings
